@@ -6,12 +6,12 @@ pipeline{
             steps {
                 script {
                     try {
-                        withCredentials([file(credentialsId: 'docker-hub', variable: 'ProjectEnvFile',url:'https://github.com/rin1652/docker-image-registry.git')]){
-                            sh "rm -rf $WORKSPACE/.env"
-                            sh 'cp $ProjectEnvFile $WORKSPACE/.env'
-                        }
+                      withCredentials([file(credentialsId: 'docker-hub', variable: 'ProjectEnvFile')]) {
+                        sh "rm -rf $WORKSPACE/.env"
+                        sh "cp $ProjectEnvFile $WORKSPACE/.env" // Chỉnh sửa ở đây
+                      }
                     } catch (err) {
-                        throw new Exception("Throw to stop pipeline")
+                      throw new Exception("Throw to stop pipeline")
                     }
                 }
             }
