@@ -15,6 +15,14 @@ pipeline {
         //         }
         //     }
         // }
+         stage('3-jdk-8') {
+            agent {
+                docker {
+                    image 'maven:3-jdk-8'
+                    args '-v $HOME/.m2:/root/.m2'
+                    reuseNode true
+                }
+            }
         stage('Clone') {
             steps {
                 git 'https://github.com/rin1652/docker-image-registry.git'
