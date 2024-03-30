@@ -15,14 +15,20 @@ pipeline {
         //         }
         //     }
         // }
-         stage('3-jdk-8') {
+         stage('lts') {
             agent {
                 docker {
-                    image 'maven:3-jdk-8'
+                    registryUrl 'https://registry.hub.docker.com'
+                    registryCredentialsId 'docker-hub'
+                    image 'maven:lts'
                     args '-v $HOME/.m2:/root/.m2'
                     reuseNode true
                 }
             }
+            steps {
+                sh 'mvnw -B clean build'
+            }
+        }
         stage('Clone') {
             steps {
                 git 'https://github.com/rin1652/docker-image-registry.git'
