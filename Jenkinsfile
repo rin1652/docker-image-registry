@@ -1,20 +1,20 @@
 pipeline {
     agent any
     stages {
-        // stage('Setup project environment') {
-        //     steps {
-        //         script {
-        //             try {
-        //                 withCredentials([file(credentialsId: 'docker-hub', variable: 'ProjectEnvFile')]) {
-        //                     sh "rm -rf $WORKSPACE/.env"
-        //                     sh "cp $ProjectEnvFile $WORKSPACE/.env" // Chỉnh sửa ở đây
-        //                 }
-        //             } catch (err) {
-        //                 throw new Exception("Throw to stop pipeline")
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Setup project environment') {
+            steps {
+                script {
+                    try {
+                        withCredentials([file(credentialsId: 'docker-hub', variable: 'ProjectEnvFile')]) {
+                            sh "rm -rf $WORKSPACE/.env"
+                            sh "cp $ProjectEnvFile $WORKSPACE/.env" // Chỉnh sửa ở đây
+                        }
+                    } catch (err) {
+                        throw new Exception("Throw to stop pipeline")
+                    }
+                }
+            }
+        }
         //  stage('lts') {
         //     agent {
         //         docker {
