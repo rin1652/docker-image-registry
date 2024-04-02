@@ -22,7 +22,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                withDockerRegistry(credentialsId: 'docker-hub') {
+                withDockerRegistry(credentialsId: 'docker-hub', url: '') {
                     sh 'docker build -t rin1652/docker-image-registry:v10 .'
                     sh 'docker push rin1652/docker-image-registry:v10'
                 }
